@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>Jospel MOUOTIE · portfolio + compétences progressives</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --primary-dark: #0a2b5e;
+            --primary-blue: #2563eb;
+            --primary-light: #4f8ef7;
+            --accent-vert: #10b981;
+            --bg-soft: #f5faff;
+            --card-white: #ffffff;
+            --grey-light: #eef4ff;
+        }
+
+        body {
+            background: linear-gradient(125deg, #ecf3ff 0%, #ffffff 90%);
+            color: #0b2342;
+            scroll-behavior: smooth;
+        }
+
+        /* ----- BOUTON WHATSAPP FLOTTANT (numéro corrigé) ----- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 25px;
+            background: #25D366;
+            color: white;
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+            box-shadow: 0 20px 30px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: 0.3s;
+            border: 3px solid white;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            background: #20bd5a;
+            transform: scale(1.12) rotate(3deg);
+        }
+
+        .whatsapp-float::after {
+            content: "658 60 61 03";
+            position: absolute;
+            right: 85px;
+            background: var(--primary-dark);
+            color: white;
+            padding: 7px 18px;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.2s;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+        }
+
+        .whatsapp-float:hover::after {
+            opacity: 1;
+            right: 95px;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 1.8rem 2rem 3rem;
+        }
+
+        /* navigation */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(14px);
+            padding: 1rem 2.2rem;
+            border-radius: 70px;
+            box-shadow: 0 18px 35px -14px var(--primary-dark);
+            margin-bottom: 2.8rem;
+            border: 1px solid rgba(37,99,235,0.25);
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 2rem;
+            background: linear-gradient(145deg, var(--primary-dark), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--primary-dark);
+            transition: 0.2s;
+            border-bottom: 3px solid transparent;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a:hover {
+            border-bottom-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .btn-cv {
+            background: var(--primary-dark);
+            color: white !important;
+            padding: 0.7rem 1.8rem;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            border: 1px solid var(--primary-dark);
+            box-shadow: 0 10px 16px -8px #0a2b5e;
+        }
+
+        .btn-cv:hover {
+            background: #0f3570;
+            color: white;
+            transform: translateY(-4px);
+        }
+
+        /* hero */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            background: white;
+            border-radius: 60px;
+            padding: 2.8rem 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 35px 45px -30px var(--primary-dark);
+            border: 1px solid rgba(255,255,255,0.7);
+            align-items: center;
+        }
+
+        .hero-content {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .badge {
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-vert));
+            color: white;
+            font-weight: 600;
+            padding: 0.5rem 1.8rem;
+            border-radius: 40px;
+            display: inline-block;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+        }
+
+        .hero-highlight {
+            background: linear-gradient(145deg, #2563eb, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 240px;
+            background: #cbe0fe;
+            border-radius: 40px;
+            padding: 1.3rem;
+            box-shadow: 0 25px 30px -18px var(--primary-dark);
+            border: 3px solid white;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 280px;
+            border-radius: 30px;
+            aspect-ratio: 1/1.1;
+            object-fit: cover;
+            border: 4px solid white;
+        }
+
+        /* présentation en 4 phrases */
+        .presentation-quadri {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+            margin: 2rem 0 1.2rem;
+        }
+
+        .phrase-card {
+            background: rgba(37,99,235,0.04);
+            padding: 1.3rem 1.5rem;
+            border-radius: 30px;
+            border-left: 6px solid var(--primary-blue);
+            font-weight: 500;
+            color: #152b4a;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+            backdrop-filter: blur(2px);
+        }
+
+        .phrase-card i {
+            color: var(--accent-vert);
+            margin-right: 12px;
+            font-size: 1.4rem;
+        }
+
+        /* infos perso */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+            gap: 1rem;
+            margin: 1.8rem 0;
+        }
+
+        .info-item {
+            background: #f3f8ff;
+            padding: 1rem 1.3rem;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid #cddfff;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            background: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* section titre */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 2.5rem 0 1.8rem;
+            display: inline-block;
+            border-bottom: 5px solid var(--accent-vert);
+            padding-bottom: 5px;
+        }
+
+        /* barres de progression compétences */
+        .competences-progress {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            background: white;
+            border-radius: 50px;
+            padding: 2.5rem 2.2rem;
+            box-shadow: 0 25px 35px -20px #0a2b5e33;
+            margin: 2rem 0 3rem;
+        }
+
+        .skill-progress-item {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .skill-label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 20px;
+            background: #e2ecff;
+            border-radius: 60px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-blue), #6499ff);
+            border-radius: 60px;
+            width: 0%; /* sera défini en inline */
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px #2563ebaa;
+        }
+
+        /* expérience */
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .exp-card {
+            background: white;
+            border-radius: 35px;
+            padding: 2rem;
+            border-left: 8px solid var(--primary-blue);
+            box-shadow: 0 18px 30px -15px rgba(10,43,94,0.2);
+            transition: 0.2s;
+        }
+
+        .exp-card:hover {
+            transform: translateY(-8px);
+            border-left-color: var(--accent-vert);
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .exp-date {
+            background: #e0edff;
+            padding: 0.2rem 1rem;
+            border-radius: 60px;
+        }
+
+        /* PROJETS : clic sur l'image => redirection */
+        .projets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2.2rem;
+            margin: 2rem 0;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 35px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -15px #0a2b5e;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: scale(1.02) translateY(-8px);
+            box-shadow: 0 28px 40px -15px #2563eb;
+        }
+
+        .project-img {
+            width: 100%;
+            aspect-ratio: 16/11;
+            background-size: cover;
+            background-position: center;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .project-card:hover .project-img {
+            filter: brightness(1.05) saturate(1.2);
+        }
+
+        /* overlay lien */
+        .project-img::after {
+            content: "\f0c1";  /* icône lien */
+            font-family: "Font Awesome 6 Free"; font-weight: 900;
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: white;
+            color: var(--primary-blue);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+            opacity: 0.9;
+            transition: 0.2s;
+        }
+
+        .project-card:hover .project-img::after {
+            background: var(--primary-blue);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .project-desc {
+            padding: 1.5rem 1.5rem 1.8rem;
+        }
+
+        .project-desc h3 {
+            color: var(--primary-dark);
+            font-weight: 800;
+        }
+
+        .project-desc p {
+            color: #2c405c;
+        }
+
+        .footer-zone {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-radius: 60px;
+            padding: 1.8rem 2.5rem;
+            margin-top: 4rem;
+            box-shadow: 0 16px 28px -18px var(--primary-dark);
+        }
+
+        .btn-pdf {
+            background: var(--primary-dark);
+            color: white;
+            border: none;
+            padding: 1rem 2.2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            display: inline-flex;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1.1rem;
+        }
+
+        .btn-pdf:hover {
+            background: #0f3570;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width:650px) {
+            .presentation-quadri { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- WhatsApp flottant avec le bon numéro -->
+<a href="https://wa.me/237658606103" class="whatsapp-float" target="_blank" title="WhatsApp direct">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<div class="container">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <span class="logo"><i class="fas fa-bolt" style="color: #2563eb;"></i> Jospel M.</span>
+        <div class="nav-links">
+            <a href="#projets">Projets</a>
+            <a href="#competences">Compétences</a>
+            <a href="#experience">Expériences</a>
+            <a href="newCV2%20ingénieur%20informaticien%20développeur%20Web%20et%20mobile%20fullstack.pdf" download class="btn-cv"><i class="fas fa-download"></i> CV</a>
+        </div>
+    </nav>
+
+    <!-- Hero + présentation 4 phrases -->
+    <div class="hero">
+        <div class="hero-content">
+            <span class="badge">Ingénieur fullstack · expert ERP</span>
+            <h1>Jospel <span class="hero-highlight">MOUOTIE</span></h1>
+            <!-- 4 phrases de présentation personnelle -->
+            <div class="presentation-quadri">
+                <div class="phrase-card"><i class="fas fa-rocket"></i> Plus d’1 an d’expérience en développement web & mobile, spécialisé dans la digitalisation des processus.</div>
+                <div class="phrase-card"><i class="fas fa-cubes"></i> Je conçois des applications robustes qui transforment les défis métier en opportunités.</div>
+                <div class="phrase-card"><i class="fas fa-chart-line"></i> Passionné par l’optimisation et l’automatisation des workflows pour gagner en efficacité.</div>
+                <div class="phrase-card"><i class="fas fa-users"></i> Jeune ingénieur camerounais, je mise sur des solutions évolutives et humaines.</div>
+            </div>
+            <!-- infos -->
+            <div class="info-grid">
+                <div class="info-item"><i class="fas fa-envelope"></i> moutiejospel@gmail.com</div>
+                <div class="info-item"><i class="fas fa-phone-alt"></i> 658 60 61 03</div>
+                <div class="info-item"><i class="fas fa-map-pin"></i> Douala Bonamoussadi</div>
+                <div class="info-item"><i class="fas fa-calendar"></i> 5 sept. 2003</div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://picsum.photos/id/1005/300/360" alt="photo placeholder">
+            <figcaption>Jospel MOUOTIE</figcaption>
+        </div>
+    </div>
+
+    <!-- COMPÉTENCES avec barres de progression -->
+    <section id="competences">
+        <h2 class="section-title"><i class="fas fa-chart-simple"></i> compétences techniques</h2>
+        <div class="competences-progress">
+            <div class="skill-progress-item">
+                <div class="skill-label"><span>PHP / Laravel</span> <span>85%</span></div>
+                <div class="progress-bar-bg"><div class="progress-fill" style="width:85%"></div></div>
+            </div>
+            <div class="skill-progress-item">
+                <div class="skill-label"><span>React / React Native</span> <span>80%</span></div>
+                <div class="progress-bar-bg"><div class="progress-fill" style="width:80%"></div></div>
+            </div>
+            <div class="skill-progress-item">
+                <div class="skill-label"><span>Flutter / Dart</span> <span>70%</span></div>
+                <div class="progress-bar-bg"><div class="progress-fill" style="width:70%"></div></div>
+            </div>
+            <div class="skill-progress-item">
+                <div class="skill-label"><span>MySQL / PostgreSQL</span> <span>85%</span></div>
+                <div class="progress-bar-bg"><div class="progress-fill" style="width:85%"></div></div>
+            </div>
+            <div class="skill-progress-item">
+                <div class="skill-label"><span>Figma / Adobe XD</span> <span>75%</span></div>
+                <div class="progress-bar-bg"><div class="progress-fill" style="width:75%"></div></div>
+            </div>
+            <div class="skill-progress-item">
+                <div class="skill-label"><span>Next.js / Vue.js</span> <span>70%</span></div>
+                <div class="progress-bar-bg"><div class="progress-fill" style="width:70%"></div></div>
+            </div>
+            <div class="skill-progress-item">
+                <div class="skill-label"><span>Tailwind / Bootstrap</span> <span>90%</span></div>
+                <div class="progress-bar-bg"><div class="progress-fill" style="width:90%"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+        <h2 class="section-title"><i class="fas fa-briefcase"></i> expériences</h2>
+        <div class="exp-grid">
+            <div class="exp-card"><div class="exp-header"><span class="exp-title">Dév. fullstack</span><span class="exp-date">fév.2026→</span></div><div class="exp-sub">Go to DIGITAL</div><p>ERP Next.js, optimisation & maintenance.</p></div>
+            <div class="exp-card"><div class="exp-header"><span class="exp-title">Dév. web & mobile</span><span class="exp-date">2ncorporate</span></div><div class="exp-sub">ERP CMCO</div><p>Gestion patient (accueil, examens, pharmacie).</p></div>
+            <div class="exp-card"><div class="exp-header"><span class="exp-title">Resp. informatique</span><span class="exp-date">Gadgets</span></div><div class="exp-sub">ERP + site</div><p>Intégration ERP, formation jeunes.</p></div>
+            <div class="exp-card"><div class="exp-header"><span class="exp-title">Stagiaire</span><span class="exp-date">Globeheart</span></div><div class="exp-sub">Développement</div><p>Support et fonctionnalités web.</p></div>
+        </div>
+    </section>
+
+    <!-- PROJETS : clic sur l'image => redirection directe vers le site (à ajuster avec vos URLs) -->
+    <section id="projets">
+        <h2 class="section-title"><i class="fas fa-image"></i> projets (cliquez sur l'image pour visiter)</h2>
+        <div class="projets-grid">
+            <!-- Projet ECOORP -->
+            <div class="project-card" onclick="window.open('https://prepasconcours.com', '_blank')">
+                <div class="project-img" style="background-image: url('https://picsum.photos/id/1043/400/250');"></div>
+                <div class="project-desc"><h3>ECOORP website</h3><p>prepasconcours.com · préparation concours</p></div>
+            </div>
+            <!-- ERP CMCO (placeholder, adapter lien) -->
+            <div class="project-card" onclick="window.open('https://cmco-demo.vercel.app', '_blank')">
+                <div class="project-img" style="background-image: url('https://picsum.photos/id/108/400/250');"></div>
+                <div class="project-desc"><h3>ERP CMCO</h3><p>Gestion patient complète (démo)</p></div>
+            </div>
+            <!-- Go to digital (site fictif mais vous mettrez le bon lien) -->
+            <div class="project-card" onclick="window.open('https://gotodigital.cm', '_blank')">
+                <div class="project-img" style="background-image: url('https://picsum.photos/id/167/400/250');"></div>
+                <div class="project-desc"><h3>ERP Go to digital</h3><p>Next.js / digitalisation</p></div>
+            </div>
+            <!-- Gadgets industries -->
+            <div class="project-card" onclick="window.open('https://gadgets-industries.com', '_blank')">
+                <div class="project-img" style="background-image: url('https://picsum.photos/id/176/400/250');"></div>
+                <div class="project-desc"><h3>Gadgets industries</h3><p>Site entreprise + formation</p></div>
+            </div>
+        </div>
+        <p style="margin-top: 0.5rem; color: #2563eb;"><i class="fas fa-mouse-pointer"></i> Cliquez sur n’importe quelle image pour ouvrir le site correspondant (liens modifiables).</p>
+    </section>
+
+    <!-- formation & prépas -->
+    <div style="background: white; border-radius: 50px; padding: 2rem 2.5rem; margin: 3rem 0; box-shadow: 0 20px 25px -18px #0a2b5e;">
+        <h3 style="font-size: 2rem; font-weight: 700; color: var(--primary-dark);"><i class="fas fa-graduation-cap" style="color: #10b981;"></i> Formation</h3>
+        <p><strong>Ingénieur informaticien - Génie logiciel</strong> · ENSPD 2021-2026<br><strong>Bac C</strong> Lycée bilingue de Mbouda</p>
+        <p><i class="fas fa-link"></i> <strong>prepasconcours.com</strong> – projet personnel de préparation aux concours</p>
+    </div>
+
+    <!-- footer PDF & téléchargement -->
+    <div class="footer-zone">
+        <span><i class="fas fa-crown" style="color: #2563eb;"></i> Jospel MOUOTIE · portfolio progressif</span>
+        <div style="display: flex; gap: 1rem;">
+            <button class="btn-pdf" id="pdfBtn"><i class="fas fa-file-pdf"></i> PDF portfolio</button>
+            <a href="newCV2%20ingénieur%20informaticien%20développeur%20Web%20et%20mobile%20fullstack.pdf" download class="btn-cv" style="background: #10b981; border: none;">📄 Télécharger CV</a>
+        </div>
+    </div>
+</div>
+
+<!-- javascript : PDF + éventuelle animation -->
+<script>
+    (function() {
+        // PDF via impression
+        document.getElementById('pdfBtn')?.addEventListener('click', function() {
+            window.print();
+        });
+
+        // on peut animer l'apparition des barres (optionnel)
+        const progressBars = document.querySelectorAll('.progress-fill');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.transition = 'width 0.8s cubic-bezier(0.2, 0.9, 0.3, 1)';
+                    // la largeur est déjà définie en inline, on la laisse.
+                }
+            });
+        }, { threshold: 0.3 });
+        progressBars.forEach(bar => observer.observe(bar));
+    })();
+</script>
+
+<!-- style print -->
+<style>
+    @media print {
+        .whatsapp-float, .btn-cv, .btn-pdf { display: none; }
+        body { background: white; }
+    }
+</style>
+</body>
+</html>
